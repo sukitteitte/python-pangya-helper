@@ -2,6 +2,7 @@ from win32gui import *
 from win32api import *
 from win32con import *
 import math
+from time import sleep
 
 
 def HWND():
@@ -52,5 +53,15 @@ def get_calculator_pb():
 
 def get_position_screen(x, y):
     x_screen, y_screen = ClientToScreen(HWND(), (x, y))
-    set_move = SetCursorPos((x_screen,y_screen))
+
+    convertedPointX = x_screen * (65536 / 1919)
+    convertedPointY = y_screen * (65536 / 1079)
+
+    set_move = mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, int(convertedPointX), int(convertedPointY), 0, 0)
+
     return set_move
+
+
+def mouse_client():
+    x_screen, y_screen = ClientToScreen(HWND(), mousePosition())
+    print(format("x={0},y={1}"), x_screen, y_screen)
