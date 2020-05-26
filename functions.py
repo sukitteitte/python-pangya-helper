@@ -62,6 +62,18 @@ def get_position_screen(x, y):
     return set_move
 
 
+def set_pb_move(pb):
+    pixel = pb * 68
+    pixel_final = 800 + pixel
+    x_screen, y_screen = ClientToScreen(HWND(), (pixel_final, 450))
+    convertedPointX = x_screen * (65536 / 1919)
+    convertedPointY = y_screen * (65536 / 1079)
+
+    set_move_pb = mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, int(convertedPointX), int(convertedPointY), 0, 0)
+
+    return set_move_pb
+
+
 def mouse_client():
     x_screen, y_screen = ClientToScreen(HWND(), mousePosition())
     print(format("x={0},y={1}"), x_screen, y_screen)

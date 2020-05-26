@@ -1,6 +1,12 @@
 from tkinter import *
 from tkinter.font import Font
 from functions import *
+
+from win32gui import *
+from win32api import *
+from win32con import *
+
+
 from time import sleep
 
 
@@ -118,7 +124,6 @@ class App(Tk):
     def move_spins(self):
         set_spin = (self.set_spin.get())
         if set_spin == 0:
-            sleep(0.01)
             get_position_screen(309, 790)
         elif set_spin == 7:
             get_position_screen(309, 805)
